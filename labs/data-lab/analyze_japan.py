@@ -13,6 +13,7 @@
   J2. 어느 플랫폼(블록체인 기반)이 쓰였나? ibet for Fin(9회차 Lab A)과 Progmat의 비중은?
   J3. 무엇을 토큰으로 만들었나? 상품 종류와 기초자산.
   J4. 2차 시장(START)에서 거래되는 종목은 얼마나 되나? 상장 종목과 아닌 종목은 무엇이 다른가?
+  J5. 발행에서 START 거래 시작까지 얼마나 걸리나? (start_listings.tsv: ODX 공식 '신규 취급 종목' 페이지, 2026-10-28 확인)
 
 실행: python analyze_japan.py   (표준 라이브러리만)
 """
@@ -22,6 +23,7 @@ from collections import defaultdict
 from pathlib import Path
 
 SRC = Path(__file__).parent / "japan_st_offerings.tsv"
+START = Path(__file__).parent / "start_listings.tsv"
 
 
 def fy(date):
@@ -93,6 +95,22 @@ def main():
         print(f"    {r['issue_date']} {r['platform']:<13} {r['amt'] * 1000:>8,.0f}백만 엔  {r['name'][:38]}")
     med = lambda xs: sorted(xs)[len(xs) // 2]
     print(f"  발행액 중앙값: START 취급 {med([r['amt'] for r in li]) * 1000:,.0f}백만 엔, 비취급 {med([r['amt'] for r in rows if not r['listed']]) * 1000:,.0f}백만 엔")
+
+    print("\nJ5. 발행일에서 START 거래 시작일까지 (ODX 공식 목록)")
+    from datetime import date
+    d = lambda x: date(int(x[:4]), int(x[5:7]), int(x[8:10]))
+    lags = []
+    for s in csv.DictReader(open(START, encoding="utf-8"), delimiter="\t"):
+        hit = [r for r in rows if s["match"] in r["name"]]
+        issued = hit[0]["issue_date"] if hit else "?"
+        lag = (d(s["start_date"]) - d(issued)).days if hit else None
+        if lag is not None and s["start_date"] <= "2026-10-28":
+            lags.append(lag)
+        tag = " (예정)" if s["start_date"] > "2026-10-28" else ""
+        print(f"    발행 {issued} → START {s['start_date']}{tag:<5} {lag:>4}일  {s['platform']:<13} {s['short_name']}")
+    quick = sum(1 for x in lags if x <= 7)
+    print(f"  거래 중 {len(lags)}종목: {quick}종목은 발행 7일 안에, {len(lags) - quick}종목은 {min(x for x in lags if x > 7)}–{max(lags)}일 뒤에 거래 시작")
+    print("  (2025-12-25 발행 오사카 레지던스는 BOOSTRY 목록에 START 표시가 없지만 ODX는 11월 2일 거래 시작을 공표했다)")
 
 
 if __name__ == "__main__":
