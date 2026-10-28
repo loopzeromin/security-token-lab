@@ -9,12 +9,13 @@ A3. 보유자 간 이전은 거래량으로 보면 발행에 비해 얼마나 �
 실행: python sol_data.py
 """
 
+import os
 import csv
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-DATA = Path(__file__).parent / "data"
+DATA = Path(os.environ.get("ST_DATA_DIR", Path(__file__).parent / "data"))  # 다른 폴더에 받으려면 ST_DATA_DIR 지정
 ZERO = "0x" + "0" * 40
 
 
@@ -25,7 +26,7 @@ def load():
             r["amount"] = float(r["amount"])
             r["ts"] = datetime.fromtimestamp(int(r["timestamp"]), tz=timezone.utc)
             rows.append(r)
-    return rows
+    return [r for r in rows if r["amount"] > 0]      # 금액 0 기록 제외 (analyze_buidl.py와 같음)
 
 
 def balances(rows):

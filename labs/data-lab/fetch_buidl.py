@@ -11,6 +11,7 @@
 - 결과: data/buidl_transfers.csv, data/buidl_meta.json
 """
 
+import os
 import csv
 import json
 import time
@@ -28,7 +29,7 @@ EXPLORERS = {   # Etherscan과 같은 형식(module=logs&action=getLogs)을 키 
 }
 RPCS = ["https://ethereum-rpc.publicnode.com", "https://eth.drpc.org", "https://eth.llamarpc.com",
         "https://eth.merkle.io", "https://1rpc.io/eth"]
-OUT = Path(__file__).parent / "data"
+OUT = Path(os.environ.get("ST_DATA_DIR", Path(__file__).parent / "data"))  # 다른 폴더에 받으려면 ST_DATA_DIR 지정
 UA = {"content-type": "application/json", "user-agent": "st-lab/1.1"}
 
 

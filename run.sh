@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # 실습 실행. 사용법:
-#   bash run.sh part1      1–6, 11–13회차 파이썬 실습과 해설
+#   bash run.sh part1      1–6, 11–13, 15회차 파이썬 실습과 해설
 #   bash run.sh a          Lab A (ibet) 실습·해설 테스트
 #   bash run.sh b          Lab B (ERC-3643) 실습·해설 테스트
 #   bash run.sh c          Lab C 결제 지연 위험 모형
 #   bash run.sh data       14회차 BUIDL 데이터 받기·검사·분석 (몇 분)
+#   bash run.sh japan      14회차 일본 공모 ST 94건 분석 (몇 초)
+#   bash run.sh design     15회차 완성 사례 모형 (시나리오 15개, 3초)
 #   bash run.sh all        part1, a, b, c 전부
 WS="$(cd "$(dirname "$0")" && pwd)"
 PY="$WS/.venv/bin/python"
@@ -40,6 +42,8 @@ data() {
 
 case "${1:-}" in
   part1) part1 ;; a) lab_a ;; b) lab_b ;; c) lab_c ;; data) data ;;
+  japan) cd "$WS/labs/data-lab" && "$PY" analyze_japan.py ;;
+  design) cd "$WS/labs/part1" && "$PY" s15_capstone_model.py ;;
   all) part1; echo; lab_a; echo; lab_b; echo; lab_c ;;
-  *) sed -n '2,9p' "$0" ;;
+  *) sed -n '2,10p' "$0" ;;
 esac

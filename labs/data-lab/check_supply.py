@@ -8,6 +8,7 @@ CSV에 없던 기록을 찾아 붙인다.
 실행: python -u check_supply.py   (fetch_buidl.py 다음)
 """
 
+import os
 import csv
 import json
 import time
@@ -17,7 +18,7 @@ from pathlib import Path
 
 from fetch_buidl import EXPLORERS, RPCS, START_BLOCK, TOKEN, TRANSFER_TOPIC, h2i, http, rpc_one
 
-DATA = Path(__file__).parent / "data"
+DATA = Path(os.environ.get("ST_DATA_DIR", Path(__file__).parent / "data"))  # 다른 폴더에 받으려면 ST_DATA_DIR 지정
 ZERO = "0x" + "0" * 40
 
 

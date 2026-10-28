@@ -24,6 +24,8 @@ bash run.sh all
 | `bash run.sh b` | 9 | ERC-3643(미국·유럽 기관용 표준) 실제 계약 테스트 |
 | `bash run.sh c` | 10 | 결제 지연 위험 모형 |
 | `bash run.sh data` | 14 | 이더리움에서 BUIDL 거래 기록을 받아 분석 (몇 분) |
+| `bash run.sh japan` | 14 | 일본 공모 토큰증권 94건 목록 분석 (BOOSTRY 공개 대시보드 자료) |
+| `bash run.sh design` | 15 | 완성 사례 '한강 오피스 신탁 수익증권 토큰(가상)'의 규칙 모형과 위험 수치 |
 
 실습 파일은 `labs/` 폴더에 있고, 원본 오픈소스는 `vendor/` 폴더에 내려받아진다. 교재가 인용한 줄 번호는 ibet 커밋 `8092b7c`, ERC-3643 커밋 `2f0704d`(v4.1.3) 기준이다.
 

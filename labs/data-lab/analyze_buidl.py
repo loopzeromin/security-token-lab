@@ -12,6 +12,7 @@
 결과: 화면 출력 + data/summary_monthly.csv, data/summary_holders.csv
 """
 
+import os
 import csv
 import json
 from collections import defaultdict
@@ -20,7 +21,7 @@ from pathlib import Path
 
 import numpy as np
 
-DATA = Path(__file__).parent / "data"
+DATA = Path(os.environ.get("ST_DATA_DIR", Path(__file__).parent / "data"))  # 다른 폴더에 받으려면 ST_DATA_DIR 지정
 ZERO = "0x" + "0" * 40
 
 
@@ -31,6 +32,10 @@ def load():
             r["amount"] = float(r["amount"])
             r["ts"] = datetime.fromtimestamp(int(r["timestamp"]), tz=timezone.utc)
             rows.append(r)
+    # 금액 0인 Transfer는 잔액을 바꾸지 않고, 탐색기 응답에 들어가기도 하고 빠지기도 한다(재현성 검사에서 확인).
+    zero = sum(1 for r in rows if r["amount"] == 0)
+    rows = [r for r in rows if r["amount"] > 0]
+    print(f"금액 0인 기록 {zero}건은 제외한다")
     meta = json.loads((DATA / "buidl_meta.json").read_text())
     return rows, meta
 
