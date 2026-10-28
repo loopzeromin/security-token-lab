@@ -1,0 +1,20 @@
+{
+  "name": "Security Token Lab",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" }
+  },
+  "hostRequirements": { "cpus": 2, "memory": "8gb" },
+  "postCreateCommand": "bash .devcontainer/setup.sh 2>&1 | tee .devcontainer/setup.log",
+  "containerEnv": { "CI": "true", "HARDHAT_DISABLE_TELEMETRY_PROMPT": "true" },
+  "remoteEnv": { "PATH": "${containerEnv:PATH}:/home/vscode/.local/bin:/home/vscode/.foundry/bin" },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python", "JuanBlanco.solidity"],
+      "settings": {
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}
