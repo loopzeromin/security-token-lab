@@ -13,7 +13,7 @@
 bash run.sh all
 ```
 
-`PASS`와 `passed`, `passing`만 보이면 준비가 끝난 것이다.
+`PASS`와 `passed`, `passing`만 보이면 준비가 끝난 것이다. 2026년 10월 28일 Codespaces(2코어)에서 전체가 통과하는 것을 확인했다. Lab B 아래에 나오는 큰 표는 함수별 가스(수수료) 사용량으로, 오류가 아니다.
 
 ## 회차별 실행
 
@@ -34,6 +34,7 @@ bash run.sh all
 
 ## 안 될 때
 
+- `아직 설치 중이다`가 나오면: 설치가 끝날 때까지 기다린다. 터미널은 설치 중에도 열리지만 설치는 뒤에서 계속 돈다.
 - 설치 중 오류: `.devcontainer/setup.log`에 전체 기록이 남는다. 이 파일을 그대로 공유한다.
 - 설치를 처음부터 다시: 터미널에서 `bash .devcontainer/setup.sh`.
 
