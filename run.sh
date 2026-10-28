@@ -10,6 +10,14 @@ WS="$(cd "$(dirname "$0")" && pwd)"
 PY="$WS/.venv/bin/python"
 export PATH="$HOME/.local/bin:$HOME/.foundry/bin:$PATH" CI=true HARDHAT_DISABLE_TELEMETRY_PROMPT=true
 
+# 설치가 끝나기 전에 실행하면 Lab A, B 폴더가 아직 없다
+if ! grep -q "준비 완료" "$WS/.devcontainer/setup.log" 2>/dev/null; then
+  echo "아직 설치 중이다. 끝나면 '준비 완료'가 보인다. 진행 상황 보기:"
+  echo "  tail -f .devcontainer/setup.log"
+  echo "설치가 오류로 멈췄으면 처음부터 다시: bash .devcontainer/setup.sh"
+  exit 1
+fi
+
 part1() {
   cd "$WS/labs/part1"
   for f in s0*.py s1*.py sol_*.py; do
