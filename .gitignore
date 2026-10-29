@@ -4,3 +4,5 @@ __pycache__/
 labs/data-lab/data/
 labs/lab-c-settlement/results/
 .devcontainer/setup.log
+.pytest_cache/
+.ipynb_checkpoints/

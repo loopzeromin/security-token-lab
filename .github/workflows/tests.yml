@@ -1,0 +1,17 @@
+name: tests
+# 파이썬 실습(part1, Lab C, 일본 데이터)과 문제집 계산을 매번 다시 돌린다.
+# Lab A·B(실제 계약 테스트)는 설치가 무거워 Codespaces에서 bash run.sh a / b 로 확인한다.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  python:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -v
