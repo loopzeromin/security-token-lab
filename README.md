@@ -11,7 +11,7 @@
 1. GitHub에 로그인한다. 학생이면 [GitHub Education](https://education.github.com/) 인증을 받아 두면 무료 사용 시간이 늘어난다.
 2. 위쪽 초록색 **Code** 버튼 → **Codespaces** → **Create codespace on main**.
 3. VS Code가 열리고 설치가 자동으로 돈다(10분 안팎). 끝나면 터미널에 `준비 완료`가 보인다.
-4. `bash run.sh all`을 친다. `PASS`, `passed`, `passing`만 보이면 된다.
+4. `bash run.sh all`을 친다. `PASS`, `passed`, `passing`만 보이면 된다. 원본 테스트(ibet 3 passed, ERC-3643 31 passing)가 먼저 돌고, 실습 테스트(6 passed, 5 passing)가 뒤따른다.
 
 **내 컴퓨터에서 (파이썬 실습만)**
 
@@ -36,8 +36,8 @@ Lab A·B(실제 계약)는 Foundry·Node 22 등이 필요해 Codespaces를 권�
 | 5 | 일본: ibet for Fin | `labs/part1/s05_ibet_port.py` | 〃 | 5.1–5.4 |
 | 6 | 미국: BUIDL과 ERC-3643 | `labs/part1/s06_erc3643_port.py` | 〃 | 6.1–6.5 |
 | 7 | 한국: 조각투자에서 법제화까지 | (코드 없음) | | 7.1–7.3 |
-| 8 | 중간 점검 | 1–7회차 해설 `sol_basics.py`, `sol_markets.py` | `bash run.sh part1` | 8.1–8.2 |
-| 9 | 실제 코드 실행과 예측 대조 | `labs/lab-a-ibet/`, `labs/lab-b-erc3643/` | `bash run.sh a`, `bash run.sh b` | 9.1–9.3 |
+| 8 | 중간 점검 | 1–7회차 해설 `sol_basics.py`, `sol_markets.py`; 설치 확인 | `bash run.sh part1`, `bash run.sh check` | 8.1–8.2 |
+| 9 | 실제 코드 실행과 예측 대조 | `labs/lab-a-ibet/`, `labs/lab-b-erc3643/` | `bash run.sh a`, `bash run.sh b`, 해설 `bash run.sh sol` | 9.1–9.3 |
 | 10 | DVP와 결제 지연 위험 | `labs/lab-c-settlement/settlement_risk.py`, `notebooks/01_결제지연위험.ipynb` | `bash run.sh c` | 10.1–10.4 |
 | 11 | 대금은 어디에: 체인 위의 돈 | `labs/part1/s11_atomic_dvp.py` | `bash run.sh part1` | 11.1–11.4 |
 | 12 | 운영 위험과 권한 | `labs/part1/s12_ops_risk.py` | 〃 | 12.1–12.4 |
