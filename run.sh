@@ -9,6 +9,7 @@
 #   bash run.sh data       14회차 BUIDL 데이터 받기·검사·분석 (몇 분)
 #   bash run.sh japan      14회차 일본 공모 ST 94건 분석 (몇 초)
 #   bash run.sh design     15회차 완성 사례 모형 (시나리오 15개, 3초)
+#   bash run.sh adv        17–20회차 심화 실습과 해설 (가치평가·바젤·스테이블코인·담보)
 #   bash run.sh test       교재 숫자 회귀 테스트 (pytest, 약 30초)
 #   bash run.sh nb         노트북 3개를 다시 실행해 출력 갱신 (2분 안팎)
 #   bash run.sh all        part1, check, a, b, c 전부
@@ -60,6 +61,12 @@ sol() {
   echo; echo "== 9회차 과제 2 해설: CountryRestrictions (기대: 2 passing)"
   hh_test test/study/solution-country.test.ts
 }
+adv() {
+  cd "$WS/labs/advanced"
+  for f in s1*.py s2*.py sol_*.py; do
+    if "$PY" "$f" > /tmp/out.txt 2>&1; then echo "PASS  $f"; else echo "FAIL  $f"; cat /tmp/out.txt; fi
+  done
+}
 lab_c() { cd "$WS/labs/lab-c-settlement" && "$PY" settlement_risk.py; }
 data() {
   cd "$WS/labs/data-lab"
@@ -70,8 +77,9 @@ case "${1:-}" in
   part1) part1 ;; check) check ;; a) lab_a ;; b) lab_b ;; sol) sol ;; c) lab_c ;; data) data ;;
   japan) cd "$WS/labs/data-lab" && "$PY" analyze_japan.py ;;
   design) cd "$WS/labs/part1" && "$PY" s15_capstone_model.py ;;
+  adv) adv ;;
   test) cd "$WS" && "$PY" -m pytest -q ;;
   nb) cd "$WS/notebooks" && "$PY" -m jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=600 0*.ipynb ;;
   all) part1; echo; check; echo; lab_a; echo; lab_b; echo; lab_c ;;
-  *) sed -n '2,14p' "$0" ;;
+  *) sed -n '2,15p' "$0" ;;
 esac
