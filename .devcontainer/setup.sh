@@ -16,7 +16,9 @@ uv --version; anvil --version | head -1; node -v; npm -v
 
 step "2. 실습용 파이썬 환경 (part1, Lab C, data-lab)"
 uv venv "$WS/.venv" --python 3.12 --allow-existing
-uv pip install --python "$WS/.venv/bin/python" numpy cryptography
+uv pip install --python "$WS/.venv/bin/python" -r "$WS/requirements-notebooks.txt"
+# 그림의 한글 글꼴 (노트북)
+sudo apt-get install -y -qq fonts-noto-cjk >/dev/null 2>&1 || echo "한글 글꼴 설치 생략(그림의 한글이 네모로 보일 수 있음)"
 
 step "3. ibet-SmartContract (Lab A)"
 mkdir -p "$VENDOR"
