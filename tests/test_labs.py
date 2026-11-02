@@ -106,3 +106,39 @@ def test_japan_offerings(run):
     assert "공모 ST 94건" in out and "합계 407.5십억 엔" in out
     assert "1건 발행액 중앙값 2,230백만 엔, 최대 31,414백만 엔" in out
     assert "취급 10건 / 전체 94건" in out
+
+
+# ---------------------------------------------------------------- 17–20회차 (심화)
+
+def test_s17_valuation(run):
+    out = run("advanced/s17_valuation.py")
+    assert "1토큰 4,711원 (발행가 5,000원)" in out
+    assert "발행가 기준 IRR 4.64%" in out
+    assert "5,393" in out and "4,165" in out
+    assert "1.05%" in out and "19.13%" in out and "26.28%" in out
+    assert "세후 3.47%" in out and "세후 3.27%" in out and "세후 2.52%" in out
+
+
+def test_s18_basel(run):
+    out = run("advanced/s18_basel_capital.py")
+    for x in ("434.8억", "504.8억", "134.8억", "2,204.8억", "기본자본의 2.18%"):
+        assert x in out
+
+
+def test_s19_stablecoin(run):
+    out = run("advanced/s19_stablecoin_run.py")
+    for x in ("0.8969", "0.8324", "0.9625", "0.9379", "11,351", "9,243", "0.9175"):
+        assert x in out
+
+
+def test_s20_collateral(run):
+    out = run("advanced/s20_collateral.py")
+    for x in ("0.086%", "0.067%", "0.066%", "0.062%", "4.047%", "8.441%", "372백만$", "186백만$", "93백만$"):
+        assert x in out
+
+
+def test_sol_deep(run):
+    out = run("advanced/sol_deep.py")
+    for x in ("4,753원", "IRR 4.64% → 4.84%", "4,165원, 기본 대비 -11.6%", "합계 필요자본 42.8억",
+              "A은행 비중 1.41% 이하", "0.8083", "0.9178", "14.40%", "125백만$"):
+        assert x in out
