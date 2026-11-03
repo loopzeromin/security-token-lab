@@ -120,3 +120,59 @@ def test_15_3_distribution():
     pay = {k: cash * v // tot for k, v in bal.items()}
     pay["a"] += cash - sum(pay.values())
     assert pay == {"a": 600_001, "b": 299_999, "c": 100_000}
+
+
+# ---------------------------------------------------------------- 17–21회차 (심화)
+import sys as _sys
+_sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parents[1] / "labs" / "advanced"))
+
+
+def test_17_1_gordon():
+    assert round(4.6 / 0.045, 2) == 102.22 and round((4.6 - 0.5) / 0.045, 2) == 91.11
+
+
+def test_17_2_longstaff_same_s():
+    from s17_valuation import longstaff
+    assert longstaff(0.15, 4) == pytest.approx(longstaff(0.30, 1))
+    assert round(100 * longstaff(0.30, 1), 2) == 26.28
+
+
+def test_17_3_after_tax():
+    assert round(4.1 * (1 - 0.154), 2) == 3.47 and round(4.1 * (1 - 0.385), 2) == 2.52
+
+
+def test_18_1_capital():
+    assert 0.08 * 1.0 * 300 == pytest.approx(24) and 0.08 * 12.5 * 300 == pytest.approx(300)
+
+
+def test_19_1_remaining_share():
+    v = lambda a, f: (a - f) / (1 - f)
+    assert round(v(0.95, 0.3), 4) == 0.9286 and v(0.95, 0.5) == pytest.approx(0.9)
+
+
+def test_20_1_2_haircut_buffer():
+    z = 2.326
+    assert round(100 * (z * 0.012 * sqrt(2) + 0.001), 2) == 4.05
+    assert round(100 * (z * 0.012 * sqrt(5) + 0.001), 2) == 6.34
+    assert round(100 * (z * 0.00005 * sqrt(5) + 0.0005), 4) == 0.0760
+    assert [round(z * 0.08 * 500 * sqrt(l), 1) for l in (4, 1, 0.25)] == [186.1, 93.0, 46.5]
+
+
+def test_21_1_net_buy():
+    from s21_sto_business import net_buy_check
+    log, net = net_buy_check([("KDX", "매수", 5000_0000), ("KDX", "매수", 3000_0000), ("KDX", "매도", 4000_0000),
+                              ("KDX", "매수", 6000_0000), ("KDX", "매수", 1000_0000), ("NXT", "매수", 9000_0000)])
+    assert [r for *_, r, _ in log] == ["체결", "체결", "체결", "체결", "거절", "체결"]
+    assert net == {"KDX": 1_0000_0000, "NXT": 9000_0000}
+
+
+def test_21_2_breakeven():
+    assert 50 / (1.2 - 0.2) == pytest.approx(50) and 10 / (1.2 - 0.8) == pytest.approx(25)
+    assert round(40 / 0.6, 1) == 66.7
+
+
+def test_21_3_ledger_design():
+    from s21_sto_business import Node, check_ledger
+    nodes = [Node("예탁원", "전자등록기관", 0.25), Node("A증권", "계좌관리기관", 0.25),
+             Node("B증권", "계좌관리기관", 0.25), Node("조각투자사", "발행인계좌관리기관", 0.25)]
+    assert check_ledger(nodes) == []
