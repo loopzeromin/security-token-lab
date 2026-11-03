@@ -1,5 +1,5 @@
 """
-17–20회차(심화) 과제 해설. 각 회차 실습 파일의 함수를 그대로 불러 가정만 바꿔 계산한다.
+17–21회차(심화) 과제 해설. 각 회차 실습 파일의 함수를 그대로 불러 가정만 바꿔 계산한다.
 
 실행: python3 sol_deep.py   (numpy 필요, 몇 초)
 """
@@ -10,6 +10,7 @@ import s17_valuation as v
 import s18_basel_capital as b
 import s19_stablecoin_run as st
 import s20_collateral as c
+import s21_sto_business as k
 
 
 def hw17():
@@ -97,8 +98,22 @@ def hw20():
     return h1, h3, freed
 
 
+def hw21():
+    print("\n== 21회차")
+    log, net = k.net_buy_check([("KDX", "매수", 9_000_0000), ("KDX", "매도", 3_000_0000)])
+    room = {v: k.LIMIT - net.get(v, 0) for v in ("KDX", "NXT")}
+    print(f"1. KDX 순매수 {net['KDX']/1e4:,.0f}만 원 → 더 살 수 있는 금액 KDX {room['KDX']/1e4:,.0f}만 원, "
+          f"넥스트레이드 {room['NXT']/1e4:,.0f}만 원")
+    shared = dict(k.SHARED, per_issue=0.6 * k.EOK)
+    n1 = k.breakeven_between(k.OWN, shared)
+    n2 = k.breakeven_between(dict(k.OWN, fixed=40 * k.EOK), shared)
+    print(f"2. 공동 건당 0.6억이면 비용이 같아지는 건수 {n1:.1f}건, 독자 고정비 40억이면 {n2:.1f}건")
+    return room, n1, n2
+
+
 if __name__ == "__main__":
     hw17()
     hw18()
     hw19()
     hw20()
+    hw21()

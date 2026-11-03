@@ -140,5 +140,16 @@ def test_s20_collateral(run):
 def test_sol_deep(run):
     out = run("advanced/sol_deep.py")
     for x in ("4,753원", "IRR 4.64% → 4.84%", "4,165원, 기본 대비 -11.6%", "합계 필요자본 42.8억",
-              "A은행 비중 1.41% 이하", "0.8083", "0.9178", "14.40%", "125백만$"):
+              "A은행 비중 1.41% 이하", "0.8083", "0.9178", "14.40%", "125백만$",
+              "KDX 4,000만 원", "173.3건", "106.7건"):
         assert x in out
+
+
+def test_s21_sto_business(run):
+    out = run("advanced/s21_sto_business.py")
+    assert "D. 공동 인프라: 예탁원 + 증권사 3곳        통과" in out
+    assert "분산원장 이용에 직접 대가를 받는다(금지)" in out
+    assert "A증권의 합의·검증 지분 60%: 50% 미만이어야 한다" in out
+    assert "KDX 매수  4,000만 원 → 거절" in out
+    assert "1인당 청약한도 1,000만 원" in out
+    assert "손익분기 건수: 독자 50.0건, 공동 16.0건. 두 방식 비용이 같아지는 건수 74.3건" in out
