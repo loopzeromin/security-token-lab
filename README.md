@@ -45,11 +45,11 @@ Lab A·B(실제 계약)는 Foundry·Node 22 등이 필요해 Codespaces를 권�
 | 14 | 실증: BUIDL 기록과 일본 공모 ST | `labs/data-lab/`, `notebooks/03_일본공모ST.ipynb` | `bash run.sh data`, `bash run.sh japan` | 14.1–14.3 |
 | 15 | 완성 사례: 한국형 부동산 토큰증권 | `labs/part1/s15_capstone_model.py` | `bash run.sh design` | 15.1–15.4 |
 | 16 | 종합 정리 | 전부 | `bash run.sh test` | 16.1–16.2 |
-| 17 (심화) | 가치평가·회계·세무 | `labs/advanced/s17_valuation.py` | `bash run.sh adv` | |
-| 18 (심화) | 은행 자본: 바젤 암호자산 기준 | `labs/advanced/s18_basel_capital.py` | 〃 | |
-| 19 (심화) | 스테이블코인·예금토큰 | `labs/advanced/s19_stablecoin_run.py` | 〃 | |
-| 20 (심화) | 토큰화 MMF와 담보 | `labs/advanced/s20_collateral.py` | 〃 | |
-| 21 (심화) | 한국 증권사의 토큰증권 실무 | `labs/advanced/s21_sto_business.py` | 〃 | |
+| 17 (심화) | 가치평가·회계·세무 | `labs/advanced/s17_valuation.py` | `bash run.sh adv` | 17.1–17.3 |
+| 18 (심화) | 은행 자본: 바젤 암호자산 기준 | `labs/advanced/s18_basel_capital.py` | 〃 | 18.1–18.3 |
+| 19 (심화) | 스테이블코인·예금토큰 | `labs/advanced/s19_stablecoin_run.py` | 〃 | 19.1–19.3 |
+| 20 (심화) | 토큰화 MMF와 담보 | `labs/advanced/s20_collateral.py` | 〃 | 20.1–20.3 |
+| 21 (심화) | 한국 증권사의 토큰증권 실무 | `labs/advanced/s21_sto_business.py` | 〃 | 21.1–21.4 |
 
 10–13회차 과제 해설은 `labs/part1/sol_advanced.py`, 14회차 해설은 `labs/data-lab/sol_data.py`, 17–21회차 해설은 `labs/advanced/sol_deep.py`다.
 
@@ -82,7 +82,7 @@ run.sh                모든 실습의 진입점
 
 ## 검증 상태 (2026년 10월)
 
-- part1 모든 스크립트·해설, Lab C, 일본 분석, 심화 17–21: 실행해서 출력 확인, 테스트 35개 통과(Python 3.13).
+- part1 모든 스크립트·해설, Lab C, 일본 분석, 심화 17–21: 실행해서 출력 확인, 테스트 44개 통과(Python 3.13).
 - Lab A: 실습 테스트 6개 통과, 해설 테스트 `test_solution_cancel.py` 1개 통과.
 - Lab B: 원본 테스트 31개, 실습 테스트 5개, 해설 테스트 `solution-country.test.ts` 2개 통과.
 - data-lab: 2024년 3월–2026년 10월 BUIDL Transfer를 두 번 받아 금액 0 기록을 빼면 17,149건으로 일치. 공개 노드는 넓은 구간 조회를 거부하므로 탐색기 API(Blockscout, Routescan)를 쓴다.
