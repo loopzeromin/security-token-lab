@@ -83,7 +83,7 @@ run.sh                모든 실습의 진입점
 ## 검증 상태 (2026년 10월)
 
 - part1 모든 스크립트·해설, Lab C, 일본 분석, 심화 17–21: 실행해서 출력 확인, 테스트 44개 통과(Python 3.13).
-- 2026-11-03 Codespaces에서 `bash run.sh all` 재확인: 파이썬 19개 PASS, Lab C 출력 일치, 원본 테스트 ibet 3 passed·ERC-3643 31 passing, Lab A 6 passed, Lab B 5 passing.
+- 2026-11-03 Codespaces에서 `bash run.sh all` 재확인: 파이썬 19개 PASS, Lab C 출력 일치, 원본 테스트 ibet 3 passed·ERC-3643 31 passing, Lab A 6 passed, Lab B 5 passing. `bash run.sh sol`: 9회차 해설 1 passed·2 passing.
 - Lab A: 실습 테스트 6개 통과, 해설 테스트 `test_solution_cancel.py` 1개 통과.
 - Lab B: 원본 테스트 31개, 실습 테스트 5개, 해설 테스트 `solution-country.test.ts` 2개 통과.
 - data-lab: 2024년 3월–2026년 10월 BUIDL Transfer를 두 번 받아 금액 0 기록을 빼면 17,149건으로 일치. 공개 노드는 넓은 구간 조회를 거부하므로 탐색기 API(Blockscout, Routescan)를 쓴다.
