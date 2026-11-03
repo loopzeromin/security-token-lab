@@ -83,6 +83,7 @@ run.sh                모든 실습의 진입점
 ## 검증 상태 (2026년 10월)
 
 - part1 모든 스크립트·해설, Lab C, 일본 분석, 심화 17–21: 실행해서 출력 확인, 테스트 44개 통과(Python 3.13).
+- 2026-11-03 Codespaces에서 `bash run.sh all` 재확인: 파이썬 19개 PASS, Lab C 출력 일치, 원본 테스트 ibet 3 passed·ERC-3643 31 passing, Lab A 6 passed, Lab B 5 passing.
 - Lab A: 실습 테스트 6개 통과, 해설 테스트 `test_solution_cancel.py` 1개 통과.
 - Lab B: 원본 테스트 31개, 실습 테스트 5개, 해설 테스트 `solution-country.test.ts` 2개 통과.
 - data-lab: 2024년 3월–2026년 10월 BUIDL Transfer를 두 번 받아 금액 0 기록을 빼면 17,149건으로 일치. 공개 노드는 넓은 구간 조회를 거부하므로 탐색기 API(Blockscout, Routescan)를 쓴다.
@@ -96,7 +97,7 @@ run.sh                모든 실습의 진입점
 
 - `Lab A·B는 설치가 끝나야`가 나오면: 설치가 끝날 때까지 기다린다. 터미널은 먼저 열리고 설치는 뒤에서 계속 돈다.
 - 설치 중 오류: `.devcontainer/setup.log`에 전체 기록이 남는다. 이 파일을 그대로 공유한다.
-- 설치를 처음부터 다시: `bash .devcontainer/setup.sh`.
+- 설치를 처음부터 다시: `bash .devcontainer/setup.sh`. 단, 자동 설치가 아직 도는 중에 다시 실행하면 두 설치가 같은 폴더를 건드려 `npm error ENOTEMPTY`가 난다. `tail -f .devcontainer/setup.log`로 끝났는지 먼저 본다.
 - Lab B를 직접 설치할 때 README의 `npm ci`는 잠금 파일 불일치로 거부된다. `npm install`을 쓴다. Hardhat 2.x(잠금 파일 2.24.2)는 Node 26에서 HH502가 나므로 Node 22로 돌린다.
 - 노트북 그림의 한글이 네모로 보이면 한글 글꼴(Noto Sans CJK KR, 맥은 AppleGothic)이 없는 것이다.
 - zsh에 명령을 붙여 넣을 때 줄 끝의 `# 주석`은 지운다(`unknown file attribute` 오류).
