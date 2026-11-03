@@ -12,7 +12,7 @@
 #   bash run.sh adv        17–21회차 심화 실습과 해설 (가치평가·바젤·스테이블코인·담보·증권사 실무)
 #   bash run.sh test       교재 숫자 회귀 테스트 (pytest, 약 30초)
 #   bash run.sh nb         노트북 3개를 다시 실행해 출력 갱신 (2분 안팎)
-#   bash run.sh all        part1, check, a, b, c 전부
+#   bash run.sh all        part1, adv, c, 그리고 설치가 끝났으면 check, a, b
 WS="$(cd "$(dirname "$0")" && pwd)"
 PY="$WS/.venv/bin/python"
 export PATH="$HOME/.local/bin:$HOME/.foundry/bin:$PATH" CI=true HARDHAT_DISABLE_TELEMETRY_PROMPT=true
@@ -20,8 +20,9 @@ export PATH="$HOME/.local/bin:$HOME/.foundry/bin:$PATH" CI=true HARDHAT_DISABLE_
 [ -x "$PY" ] || PY="$(command -v python3)"   # Codespaces 밖(내 컴퓨터)에서는 시스템 python3
 
 # Lab A, B는 설치가 끝나야 vendor/ 폴더가 생긴다
+setup_done() { grep -q "준비 완료" "$WS/.devcontainer/setup.log" 2>/dev/null; }
 need_setup() {
-  if ! grep -q "준비 완료" "$WS/.devcontainer/setup.log" 2>/dev/null; then
+  if ! setup_done; then
     echo "Lab A·B는 설치가 끝나야 돌릴 수 있다. 끝나면 '준비 완료'가 보인다. 진행 상황 보기:"
     echo "  tail -f .devcontainer/setup.log"
     echo "설치가 오류로 멈췄으면 처음부터 다시: bash .devcontainer/setup.sh"
@@ -80,6 +81,10 @@ case "${1:-}" in
   adv) adv ;;
   test) cd "$WS" && "$PY" -m pytest -q ;;
   nb) cd "$WS/notebooks" && "$PY" -m jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=600 0*.ipynb ;;
-  all) part1; echo; check; echo; lab_a; echo; lab_b; echo; lab_c ;;
+  all)
+    part1; echo; adv; echo; lab_c; echo
+    if setup_done; then check; echo; lab_a; echo; lab_b
+    else echo "SKIP  Lab A·B: 설치가 아직 끝나지 않았다(tail -f .devcontainer/setup.log). 끝나면 bash run.sh check / a / b"
+    fi ;;
   *) sed -n '2,15p' "$0" ;;
 esac

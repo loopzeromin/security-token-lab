@@ -11,7 +11,7 @@
 1. GitHub에 로그인한다. 학생이면 [GitHub Education](https://education.github.com/) 인증을 받아 두면 무료 사용 시간이 늘어난다.
 2. 위쪽 초록색 **Code** 버튼 → **Codespaces** → **Create codespace on main**.
 3. VS Code가 열리고 설치가 자동으로 돈다(10분 안팎). 끝나면 터미널에 `준비 완료`가 보인다.
-4. `bash run.sh all`을 친다. `PASS`, `passed`, `passing`만 보이면 된다. 원본 테스트(ibet 3 passed, ERC-3643 31 passing)가 먼저 돌고, 실습 테스트(6 passed, 5 passing)가 뒤따른다.
+4. `bash run.sh all`을 친다. `PASS`, `passed`, `passing`만 보이면 된다. 설치가 덜 끝났으면 Lab A·B는 `SKIP`으로 건너뛰고 나머지는 돈다. 원본 테스트(ibet 3 passed, ERC-3643 31 passing)가 먼저 돌고, 실습 테스트(6 passed, 5 passing)가 뒤따른다.
 
 **내 컴퓨터에서 (파이썬 실습만)**
 
